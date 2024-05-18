@@ -5,7 +5,10 @@ import { RegisterTypes } from './Signup.types'
 export const signupApi = createApi({
   reducerPath: 'signupApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_GATEWAY_URL,
+    baseUrl:
+      process.env.NODE_ENV === 'production'
+        ? process.env.NEXT_PUBLIC_API_GATEWAY_URL
+        : process.env.NEXT_PUBLIC_API_GATEWAY_LOCAL,
   }),
   endpoints: (builder) => ({
     register: builder.mutation<any, RegisterTypes>({

@@ -6,7 +6,10 @@ export const homeApi = createApi({
   reducerPath: 'homeApi',
   keepUnusedDataFor: 0,
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_GATEWAY_URL,
+    baseUrl:
+      process.env.NODE_ENV === 'production'
+        ? process.env.NEXT_PUBLIC_API_GATEWAY_URL
+        : process.env.NEXT_PUBLIC_API_GATEWAY_LOCAL,
   }),
   endpoints: (builder) => ({
     getAds: builder.query<AdsType[], null>({

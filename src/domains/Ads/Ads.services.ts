@@ -6,7 +6,10 @@ import { ManageAdsFormTypes } from '../shared/ManageAdsModal/ManageAdsModal.type
 export const adsApi = createApi({
   reducerPath: 'adsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_GATEWAY_URL,
+    baseUrl:
+      process.env.NODE_ENV === 'production'
+        ? process.env.NEXT_PUBLIC_API_GATEWAY_URL
+        : process.env.NEXT_PUBLIC_API_GATEWAY_LOCAL,
   }),
   keepUnusedDataFor: 0,
   endpoints: (builder) => ({
