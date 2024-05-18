@@ -14,11 +14,16 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials, req) {
-        const res = await fetch('http://localhost:3000/api/login', {
-          method: 'POST',
-          body: JSON.stringify(credentials),
-          headers: { 'Content-Type': 'application/json' },
-        })
+        const res = await fetch(
+          process.env.NODE_ENV === 'production'
+            ? process.env.NEXT_PUBLIC_API_GATEWAY_URL + '/login'
+            : process.env.NEXT_PUBLIC_API_GATEWAY_LOCAL + '/login',
+          {
+            method: 'POST',
+            body: JSON.stringify(credentials),
+            headers: { 'Content-Type': 'application/json' },
+          },
+        )
 
         let user = null
 
