@@ -1,0 +1,6 @@
+export const loginUrl = '/login'
+export const registerUrl = '/register'
+export const adsUrl = '/ads'
+export const editAdsUrl = '/ads/edit'
+export const deleteAdsUrl = '/ads/delete'
+export const createAdsUrl = '/ads/create'
