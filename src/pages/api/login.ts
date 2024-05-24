@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import db from '../../../tmp/db.json'
+import db from '../../../public/db.json'
 import { User } from '@/types/api/User'
 import bcrypt from 'bcrypt'
 

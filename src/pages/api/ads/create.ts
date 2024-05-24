@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import db from '../../../../tmp/db.json'
+import db from '../../../../public/db.json'
 import { AdsType } from '@/types/api/Ads'
 import { v4 as uuidv4 } from 'uuid'
 import { writeFileSync } from 'fs'
@@ -51,7 +51,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
   const modifiedAds = [newAds, ...ads]
 
-  writeFileSync(dbPath, JSON.stringify({ ads: modifiedAds, users: users }))
+  writeFileSync('public/db.json', JSON.stringify({ ads: modifiedAds, users: users }))
 
   console.log(ads)
 

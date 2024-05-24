@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import db from '../../../../tmp/db.json'
+import db from '../../../../public/db.json'
 import { AdsType } from '@/types/api/Ads'
 import { writeFileSync } from 'fs'
 import { User } from '@/types/api/User'
@@ -41,7 +41,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
   const filteredAds = ads.filter((ads) => ads.id !== id)
 
-  writeFileSync(dbPath, JSON.stringify({ ads: filteredAds, users: [...usersWithoutAds, ...usersWithAds] }))
+  writeFileSync('public/db.json', JSON.stringify({ ads: filteredAds, users: [...usersWithoutAds, ...usersWithAds] }))
 
   try {
     res.status(200).json({
