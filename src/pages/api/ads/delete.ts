@@ -3,12 +3,15 @@ import db from '../../../../tmp/db.json'
 import { AdsType } from '@/types/api/Ads'
 import { writeFileSync } from 'fs'
 import { User } from '@/types/api/User'
+import path from 'path'
 
 type Data = {
   status: string
   data?: null
   message?: string
 }
+
+const dbPath = process.env.NODE_ENV === 'production' ? path.join(process.cwd(), 'json') + '/tmp/db.json' : 'tmp/db.json'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const { id } = req.query
@@ -38,7 +41,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
   const filteredAds = ads.filter((ads) => ads.id !== id)
 
-  writeFileSync('tmp/db.json', JSON.stringify({ ads: filteredAds, users: [...usersWithoutAds, ...usersWithAds] }))
+  writeFileSync(dbPath, JSON.stringify({ ads: filteredAds, users: [...usersWithoutAds, ...usersWithAds] }))
 
   try {
     res.status(200).json({

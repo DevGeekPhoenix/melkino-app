@@ -4,12 +4,15 @@ import { AdsType } from '@/types/api/Ads'
 import { v4 as uuidv4 } from 'uuid'
 import { writeFileSync } from 'fs'
 import { User } from '@/types/api/User'
+import path from 'path'
 
 type Data = {
   status: string
   data?: null
   message?: string
 }
+
+const dbPath = process.env.NODE_ENV === 'production' ? path.join(process.cwd(), 'json') + '/tmp/db.json' : 'tmp/db.json'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const { coordinates, createdBy, bedrooms, size, region, streetAddress, description } = req.body
@@ -48,7 +51,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
   const modifiedAds = [newAds, ...ads]
 
-  writeFileSync('tmp/db.json', JSON.stringify({ ads: modifiedAds, users: users }))
+  writeFileSync(dbPath, JSON.stringify({ ads: modifiedAds, users: users }))
 
   console.log(ads)
 

@@ -2,12 +2,15 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import db from '../../../../tmp/db.json'
 import { AdsType } from '@/types/api/Ads'
 import { writeFileSync } from 'fs'
+import path from 'path'
 
 type Data = {
   status: string
   data?: null
   message?: string
 }
+
+const dbPath = process.env.NODE_ENV === 'production' ? path.join(process.cwd(), 'json') + '/tmp/db.json' : 'tmp/db.json'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const { id, coordinates, streetAddress, bedrooms, size, region, description, createdBy } = req.body
@@ -36,7 +39,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
       description,
     }
 
-    writeFileSync('tmp/db.json', JSON.stringify({ ads: ads, users: db.users }))
+    writeFileSync(dbPath, JSON.stringify({ ads: ads, users: db.users }))
   }
 
   console.log(ads)

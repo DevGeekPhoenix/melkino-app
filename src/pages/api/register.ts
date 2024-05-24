@@ -3,12 +3,15 @@ import db from '../../../tmp/db.json'
 import { v4 as uuidv4 } from 'uuid'
 import bcrypt from 'bcrypt'
 import { writeFileSync } from 'fs'
+import path from 'path'
 
 type Data = {
   status: string
   data: string | null
   message: string
 }
+
+const dbPath = process.env.NODE_ENV === 'production' ? path.join(process.cwd(), 'json') + '/tmp/db.json' : 'tmp/db.json'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const { name, userName, password, phoneNumber } = req.body
@@ -49,7 +52,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
         const newUserDb = [...db.users, newUser]
 
-        writeFileSync('tmp/db.json', JSON.stringify({ ads: db.ads, users: newUserDb }))
+        writeFileSync(dbPath, JSON.stringify({ ads: db.ads, users: newUserDb }))
 
         res.status(200).json({
           status: 'success',
