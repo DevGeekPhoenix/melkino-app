@@ -11,7 +11,7 @@ type Data = {
   message?: string
 }
 
-const dbPath = process.env.NODE_ENV === 'production' ? path.join(process.cwd(), 'json') + '/tmp/db.json' : 'tmp/db.json'
+const dbPath = process.env.NODE_ENV === 'production' ? process.cwd() + '/tmp/db.json' : 'tmp/db.json'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const { id } = req.query
