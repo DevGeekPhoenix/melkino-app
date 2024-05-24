@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import db from '../../../../public/db.json'
+import db from '../../../../tmp/db.json'
 import { AdsType } from '@/types/api/Ads'
 
 type Data = {

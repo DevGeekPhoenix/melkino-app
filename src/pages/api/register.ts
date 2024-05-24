@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import db from '../../../public/db.json'
+import db from '../../../tmp/db.json'
 import { v4 as uuidv4 } from 'uuid'
 import bcrypt from 'bcrypt'
 import { writeFileSync } from 'fs'
@@ -49,7 +49,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
         const newUserDb = [...db.users, newUser]
 
-        writeFileSync('public/db.json', JSON.stringify({ ads: db.ads, users: newUserDb }))
+        writeFileSync('tmp/db.json', JSON.stringify({ ads: db.ads, users: newUserDb }))
 
         res.status(200).json({
           status: 'success',
