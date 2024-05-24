@@ -74,7 +74,7 @@ const Search = () => {
    */
 
   return (
-    <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
+    <form style={{ width: '100%', maxWidth: '1440px', marginInline: 'auto' }} onSubmit={handleSubmit(onSubmit)}>
       <Grid container justifyContent="center">
         <SearchContainer justifyContent="center" container gap="12px">
           <TextField label="محله" {...register('region')} autoComplete="off" />

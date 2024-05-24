@@ -31,5 +31,3 @@ yarn-error.log*
 
 snipsnap.code-snippets
 
-// prevent fight between JSON.stringify and prettier
-public/static/locales/**

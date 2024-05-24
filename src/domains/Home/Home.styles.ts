@@ -10,7 +10,6 @@ export const HomeContainer = styled(Grid)(
 
 export const AdsHomeContainer = styled(Grid)(
   ({ theme: { palette } }) => `
-    max-width: 1440px;
     margin-inline: auto;
     position: relative;
     z-index: 2;
